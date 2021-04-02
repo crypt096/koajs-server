@@ -10,16 +10,11 @@ app.context.userData = {
 
 // Response
 app.use((ctx) => {
-  // Use the state
-  ctx.state.user = "Alex";
-
-  // Request object usage
-  let from = ctx.request.origin;
-
-  // Print out date
-  ctx.response.body = `Hello ${ctx.userData.firstName} --- ${ctx.userData.occupation}`;
-  // ctx.response.body = ctx.userData;
-  console.log(from);
+  if (ctx.userData) {
+    return (ctx.response.body = ctx.userData);
+  } else {
+    return ctx.throw(400, "Data required");
+  }
 });
 
 app.listen(3001);
