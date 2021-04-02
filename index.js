@@ -3,6 +3,10 @@ const app = new Koa();
 
 // Add a date method to the context
 app.context.date = Date();
+app.context.userData = {
+  firstName: "Alex",
+  occupation: "Software Engineer",
+};
 
 // Response
 app.use((ctx) => {
@@ -13,7 +17,8 @@ app.use((ctx) => {
   let from = ctx.request.origin;
 
   // Print out date
-  ctx.body = `Hello ${ctx.state.user} on ${ctx.date}`;
+  ctx.response.body = `Hello ${ctx.userData.firstName} --- ${ctx.userData.occupation}`;
+  // ctx.response.body = ctx.userData;
   console.log(from);
 });
 
