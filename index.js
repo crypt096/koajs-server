@@ -9,11 +9,11 @@ app.context.userData = {
 };
 
 // Response
-app.use((ctx) => {
-  if (ctx.userData) {
-    return (ctx.response.body = ctx.userData);
-  } else {
-    return ctx.throw(400, "Data required");
+app.use(async (ctx) => {
+  try {
+    return (ctx.response.body = await ctx.userData);
+  } catch (error) {
+    console.log(error);
   }
 });
 
